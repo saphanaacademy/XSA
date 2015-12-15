@@ -5,7 +5,7 @@ var xsenv = require('sap-xsenv');
 
 var port = process.env.PORT || 3000;
 
-var options = xsenv.getServices({hana:{tag:'hana'}, uaa:{tag:'xsuaa'}});
+var options = xsenv.getServices({uaa:{tag:'xsuaa'}});
 
 xsjs(options).listen(port);
 

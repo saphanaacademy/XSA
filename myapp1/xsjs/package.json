@@ -1,0 +1,16 @@
+{
+  "name": "myapp",
+  "description": "My App",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "sap-xsenv": "1.1.2",
+    "sap-xsjs": "1.2.4"
+  },
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "scripts": {
+    "start": "node start.js"
+  }
+}

@@ -1,0 +1,20 @@
+{
+    "welcomeFile": "index.html",
+    "logout":  {
+        "logoutEndpoint":  "/do/logout"
+    },
+    "routes": [
+        {
+            "destination": "xsjs",
+            "source": "(.*)(.xsjs)"
+        },
+        {
+            "destination": "xsjs",
+            "source": "(.*)(.xsodata)"
+        },
+        {
+            "localDir": "resources",
+            "source": "^/(.*)"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+---
+applications:
+
+- name: myapp1-web
+  port: <port>
+  memory: 100M
+  path: web
+  env:
+    destinations: >
+      [
+        {"name":"xsjs", "url":"https://<hana_server>:<port_xs>", "forwardAuthToken": true}
+      ]
+  services:
+    - my-uaa
+
+- name: myapp1-xsjs
+  port: <port_xsjs>
+  path: xsjs
+  memory: 128M
+  services:
+    - my-uaa

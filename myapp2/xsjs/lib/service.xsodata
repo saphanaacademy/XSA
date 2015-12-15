@@ -1,0 +1,3 @@
+service {
+	"myapp2::MyContext.MyTable" as "MyEntity";
+}

@@ -1,0 +1,10 @@
+namespace myapp2;
+
+context MyContext {
+
+  Entity MyTable {
+    key id : Integer;
+    value : String(100);
+  };
+
+ };

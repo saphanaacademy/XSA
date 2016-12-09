@@ -1,0 +1,28 @@
+mta.yaml
+--------
+(resources)
+ - name: ui5-lib
+   type: configuration 
+   parameters:
+      ID: com.sap.ui5.dist.sapui5-dist-xsa.XSAC_SAPUI5_FESV2:sapui5_fesv2 # Specifies the the ID of the provider MTA.
+      name: sapui5_fesv2
+      version: "=1.38.10"     # The version (range) of the provider MTA.
+
+(tinyui)
+    - name: ui5-lib
+      properties:
+        ui5liburl: ~{url}
+
+xs-app.json
+-----------
+	}, {
+		"source": "/(.*)",
+		"localDir": "resources",
+		"replace": {
+			"pathSuffixes": ["index.html"],
+			"vars": ["ui5liburl"]
+		}
+
+index.html
+----------
+{{{ui5liburl}}}

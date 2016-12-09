@@ -1,0 +1,72 @@
+tinyf.hdbcds
+------------
+namespace tinyworld.tinydb;
+context tinyf {
+   entity world {
+      key continent : String(100);
+   };
+   entity country {
+      key name   : String(100);
+          partof : association[0..1] to world;
+   };
+};
+
+INSERT INTO "tinyworld.tinydb::tinyf.world" VALUES ('Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.world" VALUES ('Asia');
+INSERT INTO "tinyworld.tinydb::tinyf.world" VALUES ('North America');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Spain', 'Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Denmark', 'Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('France', 'Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Ireland', 'Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Japan', 'Asia');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('China', 'Asia');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('India', 'Asia');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('USA', 'North America');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Canada', 'North America');
+
+services.xsodata
+----------------
+service  {
+   "tinyworld.tinydb::tinyf.world" as "World" navigates ("Countries" as "Countries");
+   "tinyworld.tinydb::tinyf.country" as "Country";
+   association "Countries" principal "World"("continent") multiplicity "1" dependent "Country"("partof.continent") multiplicity "*";
+}
+
+mta.yaml
+--------
+ - name: tinyjs
+   type: nodejs
+   path: tinyjs
+   requires:
+    - name: tinydb
+    - name: hdi-container
+   provides:
+    - name: tinyjs_api
+      properties:
+        service_url: ${default-url}
+
+manifest.json
+-------------
+		"dataSources": {
+			"mainService": {
+				"uri": "/services.xsodata",
+
+xs-app.json
+-----------
+{
+  "welcomeFile": "index.html",
+  "authenticationMethod": "none",
+  "routes": [{"source": "^/services.xsodata/.*$", "destination": "tinyjs_be"}]
+}
+
+mta.yaml
+--------
+ - name: tinyui
+   type: html5
+   path: tinyui
+   requires:
+    - name: tinyjs_api
+      group: destinations
+      properties:
+        name: tinyjs_be
+        url:  ~{service_url}

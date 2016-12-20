@@ -1,0 +1,94 @@
+tinyf.hdbcds
+------------
+namespace tinyworld.tinydb;
+@OData.publish : true
+context tinyf {
+   entity world {
+      key continent : String(100);
+   };
+   entity country {
+      key name   : String(100);
+          partof : association[0..1] to world;
+   };
+};
+
+INSERT INTO "tinyworld.tinydb::tinyf.world" VALUES ('Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.world" VALUES ('Asia');
+INSERT INTO "tinyworld.tinydb::tinyf.world" VALUES ('North America');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Spain', 'Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Denmark', 'Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('France', 'Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Ireland', 'Europe');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Japan', 'Asia');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('China', 'Asia');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('India', 'Asia');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('USA', 'North America');
+INSERT INTO "tinyworld.tinydb::tinyf.country" VALUES ('Canada', 'North America');
+
+xs-security.json
+----------------
+{
+	"xsappname": "tinyworld",
+	"scopes": [{
+		"name": "$XSAPPNAME.ODATASERVICEUSER",
+		"description": "TinyWorld OData Scope"
+	}],
+	"role-templates": [{
+		"name": "GenericODataAccessRole",
+		"scope-references": ["$XSAPPNAME.ODATASERVICEUSER"]
+	}]
+}
+
+xs target -s DEV
+xs create-service xsuaa devuser tinyuaa -c ./xs-security.json
+
+mta.yaml
+--------
+
+resources:
+
+ - name: tinyuaa
+   type: com.sap.xs.uaa
+   parameters:
+      path: ./xs-security.json
+
+modules:
+
+ - name: tinyjava
+   type: java
+   path: tinyjava
+   requires:
+    - name: tinyuaa
+    - name: hdi-container
+      properties:
+         JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
+            {"service_name_for_DefaultDB" : "~{hdi-container-name}"}]'
+   provides:
+    - name: tinyjava_api
+      properties:
+        service_url: ${default-url}
+
+ - name: tinyui
+   type: html5
+   path: tinyui
+   requires:
+    - name: tinyuaa
+    - name: tinyjava_api
+      group: destinations
+      properties:
+       name: tinyjava_be
+       url: ~{service_url}
+       forwardAuthToken: true
+
+xs-app.json
+-----------
+{
+	"welcomeFile": "index.html",
+	"authenticationMethod": "route",
+	"routes": [{
+		"source": "/java/odata/v4",
+		"authenticationType": "xsuaa",
+		"scope": "$XSAPPNAME.ODATASERVICEUSER",
+		"destination": "tinyjava_be"
+	}]
+}

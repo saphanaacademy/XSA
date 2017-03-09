@@ -1,0 +1,21 @@
+{
+  "myapp.db::synonyms.StockPrices": {
+    "target": {
+      "object": "StockPrices",
+      "schema.configure": "mydata-grantor/schema"
+    }
+  }
+}
+
+
+----------------------------------------------
+
+
+{
+  "myapp.db::synonyms.StockPrices": {
+    "target": {
+      "object": "StockPrices",
+      "schema.configure": "logical-mydata-grantor/schema"
+    }
+  }
+}

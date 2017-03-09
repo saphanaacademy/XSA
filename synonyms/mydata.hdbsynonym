@@ -1,0 +1,16 @@
+{
+  "myapp.db::synonyms.StockPrices": {
+    "target": {
+      "object": "StockPrices",
+      "schema": "MYDATA"
+    }
+  }
+}
+
+
+----------------------------------------------
+
+
+{ 
+  "myapp.db::synonyms.StockPrices": {}
+}

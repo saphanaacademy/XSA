@@ -1,0 +1,24 @@
+      properties:
+        TARGET_CONTAINER: ~{hdi-container-name}
+    - name: mydata-grantor
+
+ - name: mydata-grantor
+   type: org.cloudfoundry.existing-service
+
+
+----------------------------------------------
+
+
+    - name: mydata-grantor
+      group: SERVICE_REPLACEMENTS
+      properties: 
+        key: logical-mydata-grantor
+        service: ~{mydata-grantor-service}     
+
+ - name: mydata-grantor
+   properties:
+     mydata-grantor-service: ${service-name}
+#   parameters:
+#     service-name: mydata-grantor2
+   type: org.cloudfoundry.existing-service
+

@@ -1,0 +1,33 @@
+{
+	"mydata-grantor": {
+		"object_owner": { 
+			"roles": [
+				"mydata::external_access_g"
+			]
+		},
+		"application_user": {
+			"roles": [
+				"mydata::external_access"
+			]
+		}
+	}
+}
+
+
+----------------------------------------------
+
+
+{
+	"logical-mydata-grantor": {
+		"object_owner": { 
+			"roles": [
+				"mydata::external_access_g"
+			]
+		},
+		"application_user": {
+			"roles": [
+				"mydata::external_access"
+			]
+		}
+	}
+}

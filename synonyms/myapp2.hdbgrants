@@ -1,0 +1,14 @@
+{
+	"logical-myapp2-grantor": {
+		"object_owner": { 
+			"container_roles": [
+				"myapp2.db::external_access_g#"
+			]
+		},
+		"application_user": {
+			"container_roles": [
+				"myapp2.db::external_access"
+			]
+		}
+	}
+}

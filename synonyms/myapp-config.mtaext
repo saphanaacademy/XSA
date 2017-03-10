@@ -6,3 +6,12 @@ resources:
   - name: mydata-grantor
     parameters:
       service-name: mydata-grantor2
+	
+	
+-------------------------------------------------	  
+	  
+	  
+  - name: <dev-myapp2-hdi-container-service-name>
+    parameters:
+      service-name: myapp2-hdi-container
+	  

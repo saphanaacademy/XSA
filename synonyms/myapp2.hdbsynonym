@@ -1,0 +1,16 @@
+{
+  "myapp.db::synonyms.Customers": {
+    "target": {
+      "object": "myapp2.db::tables.Customers",
+      "schema": "<PHYSICAL_SCHEMA_NAME>"
+    }
+  }
+}
+
+
+----------------------------------------------
+
+
+{ 
+  "myapp.db::synonyms.Customers": {}
+}

@@ -22,3 +22,37 @@
 #     service-name: mydata-grantor2
    type: org.cloudfoundry.existing-service
 
+
+----------------------------------------------
+
+
+    - name: myapp2-grantor
+      group: SERVICE_REPLACEMENTS
+      properties: 
+        key: logical-myapp2-grantor
+        service: ~{myapp2-grantor-service}
+     
+ - name: myapp2-grantor
+   properties:
+     myapp2-grantor-service: ${service-name}
+   parameters:
+     service-name: <dev-myapp2-hdi-container-service-name>
+   type: org.cloudfoundry.existing-service
+
+
+----------------------------------------------
+
+
+    - name: <dev-myapp2-hdi-container-service-name>
+      group: SERVICE_REPLACEMENTS
+      properties: 
+        key: logical-myapp2-grantor
+        service: ~{myapp2-grantor-service}
+     
+ - name: <dev-myapp2-hdi-container-service-name>
+   properties:
+     myapp2-grantor-service: ${service-name}
+#   parameters:
+#     service-name: myapp2-hdi-container
+   type: org.cloudfoundry.existing-service
+

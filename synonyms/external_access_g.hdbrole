@@ -1,0 +1,12 @@
+{
+  "role": {
+    "name": "myapp2.db::external_access_g#",
+    "object_privileges": [
+      {
+        "name":"myapp2.db::tables.Customers",
+        "type":"TABLE",
+        "privileges_with_grant_option":[ "SELECT" ]
+      }
+    ]
+  }
+}

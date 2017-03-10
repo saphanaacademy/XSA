@@ -1,0 +1,8 @@
+{
+  "myapp.db::synonyms.Customers": {
+    "target": {
+      "object": "myapp2.db::tables.Customers",
+      "schema.configure": "logical-myapp2-grantor/schema"
+    }
+  }
+}

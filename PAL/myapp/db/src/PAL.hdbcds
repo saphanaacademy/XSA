@@ -1,0 +1,51 @@
+namespace myapp.db;
+
+context PAL {
+   table type TTData {
+      id    : Integer;
+      value : Double;
+   };
+   table type TTParams {
+      name       : String(100);
+      intArgs    : Integer;
+      doubleArgs : Double;
+      stringArgs : String(100);
+   };
+   table type TTModel {
+      name  : String(256);
+      value : String(5000);
+   };
+   table type TTForecast {
+      id    : Integer;
+      value : Double;
+      low80 : Double;
+      hi80  : Double;
+      low95 : Double;
+      hi95  : Double;
+   };
+
+   entity ParamsTrain {
+      name       : String(100) not null;
+      intArgs    : Integer;
+      doubleArgs : Double;
+      stringArgs : String(100);
+   };
+   entity ParamsForecast {
+      name       : String(100) not null;
+      intArgs    : Integer;
+      doubleArgs : Double;
+      stringArgs : String(100);
+   };
+   entity Model {
+      name  : String(256) not null;
+      value : String(5000);
+   };
+   entity Forecast {
+      key id    : Integer not null;
+          value : Double;
+          low80 : Double;
+          hi80  : Double;
+          low95 : Double;
+          hi95  : Double;
+   };
+};

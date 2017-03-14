@@ -1,0 +1,14 @@
+namespace myapp.db;
+
+context tables {
+   entity StockPrices {
+      key id       : Integer not null;
+          date     : LocalDate;
+          open     : Double;
+          high     : Double;
+          low      : Double;
+          close    : Double;
+          volume   : Integer;
+          adjClose : Double;
+   };
+};

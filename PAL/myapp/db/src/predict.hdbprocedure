@@ -1,0 +1,13 @@
+PROCEDURE "myapp.db::predict" (IN ForecastLength INTEGER)
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   AS
+BEGIN
+	upsert "myapp.db::PAL.ParamsForecast" values ('ForecastLength', :ForecastLength, null, null) where "name" = 'ForecastLength';
+	delete from "myapp.db::PAL.Forecast";
+	p1 = select * from "myapp.db::PAL.Model";
+	p2 = select * from "myapp.db::PAL.ParamsForecast";
+	call "myapp.db::PALpredict" (:p1, :p2, :p3);                              
+	insert into "myapp.db::PAL.Forecast" select * from :p3;
+END

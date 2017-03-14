@@ -1,0 +1,10 @@
+service namespace "myapp.db" {
+    "myapp.db::tables.StockPrices" as "StockPrices" 
+        create forbidden 
+        update forbidden 
+        delete forbidden;
+    "myapp.db::PAL.Forecast" as "Forecast" 
+        create forbidden 
+        update forbidden 
+        delete forbidden;
+}

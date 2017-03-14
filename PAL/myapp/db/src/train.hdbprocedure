@@ -1,0 +1,13 @@
+PROCEDURE "myapp.db::train" (IN SEARCH_STRATEGY INTEGER)
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   AS
+BEGIN
+	upsert "myapp.db::PAL.ParamsTrain" values ('SEARCH_STRATEGY', :SEARCH_STRATEGY, null, null) where "name" = 'SEARCH_STRATEGY';
+	delete from "myapp.db::PAL.Model";
+	p1 = select "id", "close" as "value" from "myapp.db::tables.StockPrices";
+	p2 = select * from "myapp.db::PAL.ParamsTrain";
+	call "myapp.db::PALtrain" (:p1, :p2, :p3);                              
+	insert into "myapp.db::PAL.Model" select * from :p3;
+END

@@ -1,0 +1,18 @@
+{ 
+  "area" : "AFLPAL", 
+  "function" : "AUTOARIMA", 
+  "parameters" : [ 
+    { 
+      "type" : "myapp.db::PAL.TTData", 
+      "direction" : "IN" 
+    }, 
+    { 
+      "type" : "myapp.db::PAL.TTParams", 
+      "direction" : "IN" 
+    }, 
+    { 
+      "type" : "myapp.db::PAL.TTModel", 
+      "direction" : "OUT" 
+    } 
+  ]
+}

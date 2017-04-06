@@ -1,4 +1,1 @@
-Mac/Linux:
-			  xs cups mydata-grantor -p "{\"host\":\"hana.hostname.com\", \"port\":\"30015\", \"user\":\"MYDATA_GRANTOR\", \"password\":\"Password1\", \"driver\":\"com.sap.db.jdbc.Driver\", \"tags\":[\"hana\"], \"schema\":\"MYDATA\"}"
-Windows:
-			  xs cups mydata-grantor -p '{"host":"hana.hostname.com", "port":"30015", "user":"MYDATA_GRANTOR", "password":"Password1", "driver":"com.sap.db.jdbc.Driver", "tags":["hana"], "schema":"MYDATA"}'
+xs cups mydata-grantor -p "{\"host\":\"hana.hostname.com\", \"port\":\"30015\", \"user\":\"MYDATA_GRANTOR\", \"password\":\"Password1\", \"driver\":\"com.sap.db.jdbc.Driver\", \"tags\":[\"hana\"], \"schema\":\"MYDATA\"}"

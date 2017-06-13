@@ -1,0 +1,37 @@
+tables.hdbcds
+-------------
+namespace sales.db;
+
+context tables {
+    entity Region {
+        key name   : String(100);
+            amount : BinaryFloat;
+    };
+
+    entity Country {
+        key name   : String(100);
+            amount : BinaryFloat;
+            partOf : association[0..1] to Region;
+    };
+};
+
+INSERT INTO "sales.db::tables.Region" VALUES ('Europe', 738.23);
+INSERT INTO "sales.db::tables.Region" VALUES ('Asia', 4164.86);
+INSERT INTO "sales.db::tables.Region" VALUES ('North America', 542.43);
+INSERT INTO "sales.db::tables.Country" VALUES ('Spain', 48.63, 'Europe');
+INSERT INTO "sales.db::tables.Country" VALUES ('UK', 64.86, 'Europe');
+INSERT INTO "sales.db::tables.Country" VALUES ('France', 66.12, 'Europe');
+INSERT INTO "sales.db::tables.Country" VALUES ('Germany', 80.34, 'Europe');
+INSERT INTO "sales.db::tables.Country" VALUES ('Japan', 126.33, 'Asia');
+INSERT INTO "sales.db::tables.Country" VALUES ('China', 1373.92, 'Asia');
+INSERT INTO "sales.db::tables.Country" VALUES ('India', 1266.42, 'Asia');
+INSERT INTO "sales.db::tables.Country" VALUES ('USA', 324.97, 'North America');
+INSERT INTO "sales.db::tables.Country" VALUES ('Canada', 35.59, 'North America');
+
+services.xsodata
+----------------
+service  {
+   "sales.db::tables.Region" as "Region" navigates ("Countries" as "Countries");
+   "sales.db::tables.Country" as "Country";
+   association "Countries" principal "Region"("name") multiplicity "1" dependent "Country"("partOf.name") multiplicity "*";
+}

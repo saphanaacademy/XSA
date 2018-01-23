@@ -20,7 +20,7 @@ create user MYUSER Password Password1;
 
 -- SQL Console (Admin)
 set schema "MYAPP_HDI_DB_1#DI";
-create local temporary column table #PRIVILEGES like "_SYS_DI"."TT_SCHEMA_PRIVILEGES"; 
+create local temporary column table "#PRIVILEGES" like "_SYS_DI"."TT_SCHEMA_PRIVILEGES"; 
 insert into "#PRIVILEGES" ("PRIVILEGE_NAME", "PRINCIPAL_SCHEMA_NAME", "PRINCIPAL_NAME") values ('SELECT', '', 'MYUSER');
 insert into "#PRIVILEGES" ("PRIVILEGE_NAME", "PRINCIPAL_SCHEMA_NAME", "PRINCIPAL_NAME") values ('INSERT', '', 'MYUSER');
 insert into "#PRIVILEGES" ("PRIVILEGE_NAME", "PRINCIPAL_SCHEMA_NAME", "PRINCIPAL_NAME") values ('UPDATE', '', 'MYUSER');

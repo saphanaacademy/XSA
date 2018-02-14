@@ -1,0 +1,6 @@
+service {
+	"myxsaapp2::MyContext.MyTable" as "MyEntity"
+		create forbidden
+		update forbidden
+		delete forbidden;
+}

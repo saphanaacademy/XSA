@@ -1,0 +1,32 @@
+ID: myxsaapp2
+_schema-version: '2.0'
+version: 0.0.1
+
+applications:
+ - name: myxsaapp2-db
+   path: db
+   memory: 256M
+   no-route: true
+   services:
+    - my-hdi-container
+
+ - name: myxsaapp2-xsjs
+   type: nodejs
+   path: xsjs
+   memory: 128M
+   port: 51520
+   services:
+    - my-uaa
+    - my-hdi-container
+
+ - name: myxsaapp2-ui
+   type: html5
+   path: ui
+   memory: 128M
+   services:
+    - my-uaa
+   env:
+    destinations: >
+     [
+      {"name":"xsjs-backend", "url":"https://<xsa-host>:51520", "forwardAuthToken":true}
+     ]

@@ -1,0 +1,16 @@
+{
+    "file_suffixes": {
+        "hdbcds": {
+            "plugin_name": "com.sap.hana.di.cds",
+            "plugin_version": "11.1.0"
+        },
+        "hdbsynonym": {
+            "plugin_name": "com.sap.hana.di.synonym",
+            "plugin_version": "11.1.0"
+        },
+        "hdbsynonymconfig": {
+            "plugin_name": "com.sap.hana.di.synonym.config",
+            "plugin_version": "11.1.0"
+        }	
+    }
+}

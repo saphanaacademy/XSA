@@ -1,0 +1,20 @@
+ID: myxsaapp1
+_schema-version: '2.0'
+version: 0.0.1
+
+applications:
+ - name: myxsaapp1-xsjs
+   type: nodejs
+   path: xsjs
+   memory: 128M
+   port: 51510
+
+ - name: myxsaapp1-ui
+   type: html5
+   path: ui
+   memory: 128M
+   env:
+    destinations: >
+     [
+      {"name":"xsjs-backend", "url":"https://<xsa-host>:51510"}
+     ]

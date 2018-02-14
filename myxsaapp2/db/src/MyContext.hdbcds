@@ -1,0 +1,10 @@
+namespace myxsaapp2;
+
+context MyContext {
+
+    entity MyTable {
+        key id      : Integer generated always as identity;
+            created : UTCTimestamp;
+    };
+
+ };

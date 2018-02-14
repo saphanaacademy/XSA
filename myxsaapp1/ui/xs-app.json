@@ -1,0 +1,8 @@
+{
+	"welcomeFile": "index.html",
+	"authenticationMethod": "none",
+	"routes": [{
+		"source": "^(.*)(.xs(js|odata))(.*)$",
+		"destination": "xsjs-backend"
+	}]
+}

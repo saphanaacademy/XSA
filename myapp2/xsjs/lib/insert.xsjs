@@ -1,11 +1,27 @@
-var conn = $.db.getConnection();
+const idParam = $.request.parameters.get('id');
+const id = Number.parseInt(idParam, 10);
 
-var sql = 'INSERT INTO "myapp2::MyContext.MyTable" VALUES (?, ?)';
-var stmt = conn.prepareStatement(sql);
-stmt.setInt(1, $.request.parameters.get('id'));
-stmt.setNString(2, $.request.parameters.get('value'));
-stmt.execute();
+if (Number.isNaN(id)) {
+    $.response.setBody("id is not a number: " + idParam);
+} else {    
+    let conn = null;
 
-conn.commit();
+    try {
+        conn = $.hdb.getConnection();
 
-$.response.setBody("XSJS Insert");
+        const rowsCount = conn.executeUpdate('INSERT INTO "myapp2::MyContext.MyTable" VALUES (?, ?)', id, $.request.parameters.get('value'));
+        conn.commit();
+
+        $.response.setBody("XSJS Insert. # of rows: " + rowsCount);
+    } catch (e) {
+        $.response.setBody("Caught an error: " + e.toString());
+    } finally {
+        if (conn) {
+            try {
+                conn.close();
+            } catch (e) {
+                $.response.setBody("Caught an error: " + e.toString());
+            }
+        }
+    }
+}
